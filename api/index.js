@@ -13,7 +13,7 @@ const postRoute = require("./routes/posts");
 const categoryRoute = require("./routes/categories");
 
 const corsOptions = {
-    origin: 'http://datamind.vn',
+    origin: 'http://195.35.23.209',
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
 }
@@ -55,7 +55,7 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'http://datamind.vn',
+            target: 'http://195.35.23.209',
             changeOrigin: true,
             secure: false
         })
