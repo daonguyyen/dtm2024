@@ -1,0 +1,25 @@
+.headers {
+    // position: relative;
+    margin-top: 46px;
+}
+
+.headersTitles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #0089D0;
+    font-size: 4rem;
+
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.headersImg {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    margin-top: 10px;
+
+}

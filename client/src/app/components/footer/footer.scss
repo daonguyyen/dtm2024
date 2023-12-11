@@ -1,0 +1,51 @@
+/*=============== FOOTER ===============*/
+.footer {
+    position: relative;
+    overflow: hidden;
+
+    &__container {
+        row-gap: 3rem;
+    }
+
+    &__logo {
+        display: inline-flex;
+        align-items: center;
+        column-gap: 0.5rem;
+        color: var(--title-color);
+        font-family: var(--title-font);
+        font-size: var(--h3-font-size);
+        font-weight: var(--font-semi-bold);
+        margin-bottom: 1rem;
+        transition: color 0.3s;
+
+        img {
+            width: 25px;
+        }
+
+        &:hover {
+            color: var(--first-color);
+        }
+    }
+
+    &__description,
+    &__link,
+    &__information {
+        font-size: var(--small-font-size);
+    }
+
+    &__info {
+        background: var(--first-color);
+        padding: 1.5rem 0;
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__copy {
+        text-align: center;
+        font-size: var(--normal-font-size);
+        color: var(--white-color);
+    }
+}

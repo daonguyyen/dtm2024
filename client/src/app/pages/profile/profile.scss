@@ -1,0 +1,129 @@
+.profile {
+    display: flex;
+    margin-top: 60px;
+}
+
+.profileWrapper {
+    flex: 9;
+    padding: 20px;
+}
+
+.profileTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profileUpdateTitle {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.profileDeleteTitle {
+    font-size: 14px;
+    color: tomato;
+    cursor: pointer;
+}
+
+.profileForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.profilePP {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+
+    &>img {
+        width: 70px;
+        height: 70px;
+        border-radius: 20px;
+        object-fit: cover;
+    }
+}
+
+.profilePPIcon {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #1c1c1c;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+
+    cursor: pointer;
+
+    path {
+        stroke: #ffffff;
+    }
+}
+
+.profileForm {
+    &>label {
+        font-size: 20px;
+        margin-top: 20px;
+    }
+
+    .formLabel {
+        font-size: 14px;
+    }
+
+    &>input {
+        color: #1c1c1c;
+        margin: 10px 0;
+        height: 40px;
+        padding: 10px 15px;
+        border: none;
+        border-bottom: 1px solid lightgray;
+    }
+}
+
+.profileSubmit {
+    width: 150px;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    background-color: #0089D0;
+    padding: 10px;
+    margin: 20px 0;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+
+
+    label {
+        margin-bottom: 10px;
+    }
+
+    .formInput {
+        position: relative;
+        max-width: 250px;
+
+    }
+
+    .settingInput {
+        height: 36px;
+        width: 100%;
+        padding: 10px 15px;
+    }
+
+
+    .profileIcon {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+    }
+}
+
+.settingErr {
+    color: tomato;
+    font-size: 14px;
+}
