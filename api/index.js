@@ -12,11 +12,11 @@ const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const categoryRoute = require("./routes/categories");
 
-const corsOptions = {
-    origin: 'http://195.35.23.209',
-    credentials: true,            //access-control-allow-credentials:true
-    optionSuccessStatus: 200
-}
+// const corsOptions = {
+//     origin: 'http://195.35.23.209',
+//     credentials: true,            
+//     optionSuccessStatus: 200
+// }
 app.use(cors(corsOptions));
 dotenv.config();
 app.use(express.json());
@@ -51,13 +51,13 @@ app.listen("5000", () => {
 })
 
 
-module.exports = function (app) {
-    app.use(
-        '/api',
-        createProxyMiddleware({
-            target: 'http://195.35.23.209',
-            changeOrigin: true,
-            secure: false
-        })
-    );
-};
+// module.exports = function (app) {
+//     app.use(
+//         '/api',
+//         createProxyMiddleware({
+//             target: 'http://195.35.23.209',
+//             changeOrigin: true,
+//             secure: false
+//         })
+//     );
+// };
