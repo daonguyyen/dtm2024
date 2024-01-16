@@ -69,7 +69,7 @@ const Write = () => {
           headers: { token: "Bearer " + currentUser.accessToken },
         }
       );
-      window.location.replace("/post/" + res.data._id);
+history.push("/posts/" + res.data._id);
     } catch (err) {
       if (err.response.status === 403) {
         dispatch({ type: "LOGOUT" });

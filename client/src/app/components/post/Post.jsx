@@ -3,12 +3,13 @@ import "./post.scss";
 import DOMPurify from "dompurify";
 import defaultImg from "../../../assets/images/icon/no-img.png";
 export default function Post({ post }) {
+const PF = "http://api.datamind.vn/uploads/";
   return (
     <Link to={`/post/${post._id}`}>
       <div className="post">
         {post.photo ? (
           <img
-            src={`../../../../../../upload/${post.photo}`}
+            src={PF + post.photo}
             className="postImg"
             alt=""
           />

@@ -1,0 +1,23 @@
+#customer-project {
+    max-width: 1150px;
+    margin: 0 auto;
+
+    .customer__block {
+        opacity: 0.2;
+        transform: scale3d(0.8, 0.8, 1);
+        transition: all 0.3s ease-in-out;
+
+        border: 1px solid #b0b0b0;
+        border-radius: 5px;
+    }
+
+    .owl-item.active.center {
+        .customer__block {
+            opacity: 1;
+            transform: scale3d(1.0, 1.0, 1);
+
+            border-color: var(--first-color);
+        }
+    }
+
+}

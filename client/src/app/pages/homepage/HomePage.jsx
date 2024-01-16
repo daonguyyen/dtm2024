@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./homepage.scss";
 import Fade from "react-reveal/Fade";
 
@@ -9,23 +9,60 @@ import PopularImg2 from "../../../assets/images/home/data-mining.gif";
 import ImexpharmImg from "../../../assets/images/home/imexpharm.png";
 import IndustryImg from "../../../assets/images/home/industry-sectors.png";
 import PopularImg3 from "../../../assets/images/home/infographic.gif";
+import PopularImg4 from "../../../assets/images/home/data-science.gif";
 import KidsplazaImg from "../../../assets/images/home/kidsplaza.png";
 import PopularImg1 from "../../../assets/images/home/stats.gif";
 import Footer from "../../components/footer/Footer";
 import TopBar from "../../components/topBar/TopBar";
+import ScrollToTop from "../../components/scrollToTop/ScrollToTop";
+
+import { useLocation } from "react-router-dom/cjs/react-router-dom";
+import axios from "axios";
+import Slider from "../../components/slider/Slider";
+import CreateSlider from "../../components/createSlider/CreateSlider";
+import Sliders from "../../components/sliders/Sliders";
+import { AuthContext } from "../../context/authContext/authContext";
 
 const allSection = ["home", "about", "services", "industry", "project"];
 
 export default function Home() {
   const ref = useRef(null);
 
+  const { currentUser } = useContext(AuthContext);
+
   const [section, setSection] = useState([...allSection.slice(0, 5)]);
+  const [sliders, setSliders] = useState([]);
+  const { search } = useLocation();
+
+  const [showCreateSlider, setShowCreateSlider] = useState(false);
+  const [refreshSliders, setRefreshSliders] = useState(false);
+
+  const handleSliderCreated = () => {
+    setRefreshSliders(!refreshSliders);
+    // Làm mới danh sách bài viết khi bài viết mới được tạo
+    // (có thể sử dụng useEffect ở PostList để tự động làm mới khi danh sách thay đổi)
+    setShowCreateSlider(false);
+  };
+
+  const handleSliderDeleted = () => {
+    setRefreshSliders(!refreshSliders); // Khi một phần tử bị xóa, làm mới danh sách
+  };
+
+  useEffect(() => {
+    const fetchSlider = async () => {
+      const res = await axios.get(
+        process.env.REACT_APP_API_URL + "/sliders" + search
+      );
+      setSliders(res.data);
+    };
+    fetchSlider();
+  }, [search]);
 
   return (
     <>
       {/* <TopBar /> */}
       <main className="main">
-        <div className="box-nav">
+        {/* <div className="box-nav">
           <ul ref={ref}>
             {section.map((section) => (
               <li key={section}>
@@ -35,7 +72,7 @@ export default function Home() {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
 
         {/* HOME SECTION  */}
         <section className="home section" id="home">
@@ -47,13 +84,13 @@ export default function Home() {
             <Fade bottom cascade>
               <div className="home__data">
                 <h1 className="home__title">
-                  Data mining with
-                  <div>minimal resources &</div>
-                  <div>maximum efficiency</div>
+                  DataMind - Pioneering Data & AI Innovations
                 </h1>
                 <p className="home__description">
-                  Giúp doanh nghiệp và tổ chức khai thác sức mạnh của dữ liệu để
-                  đưa ra quyết định thông minh.
+                  Discover DataMind's transformative Data & AI solutions. Based
+                  in Vietnam's tech hub, we're committed to empowering
+                  enterprises and individuals with innovative, customer-centric
+                  strategies for a data-driven future.
                 </p>
 
                 <a href="#contact" className="button">
@@ -71,15 +108,17 @@ export default function Home() {
               <div className="about__data">
                 <span className="section__subtitle">About Us</span>
                 <h2 className="section__title about__tile">
-                  <div>Our goals & vision</div>
+                  <div>Who We Are - DataMind's Story</div>
                 </h2>
                 <p className="about__description">
-                  Thành lập năm 2022 và khởi sướng bởi các chuyên gia trong lĩnh
-                  vực CNTT và có nhiều năm kinh nghiệm làm tư vấn phân tích dữ
-                  liệu tại các doanh nghiệp lớn ở Việt Nam. Sứ mệnh của chúng
-                  tôi là:
+                  At DataMind, we're not just innovators; we're revolutionaries
+                  in the field of Data and Analytics. Our team of experts is
+                  passionate about transforming the data landscape, offering
+                  professional services that guide our clients towards a
+                  successful, data-empowered future. We believe in making data
+                  accessible, understandable, and actionable for everyone.
                 </p>
-                <ul className="about__list">
+                {/* <ul className="about__list">
                   <li>
                     Tổ chức khai thác sức mạnh của dữ liệu để đưa ra quyết định
                     thông minh
@@ -92,7 +131,7 @@ export default function Home() {
                     Đảm nhiệm chức năng và nhiệm vụ về phân tích dữ liệu như
                     người “trong nhà” của doanh nghiệp
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </Fade>
 
@@ -104,39 +143,49 @@ export default function Home() {
         {/* POPULAR SECTION  */}
         <section className="popular section" id="services">
           <span className="section__subtitle">SERVICES</span>
-          <h2 className="section__title">Explore Our Data Services</h2>
+          <h2 className="section__title">
+            Our Expertise - Tailored Data Solutions
+          </h2>
 
           <Fade top cascade>
             <div className="popular__container contianer grid">
               <article className="popular__card">
                 <img src={PopularImg1} alt="" className="popular__img" />
-                <h3 className="popular__name">Data analytics</h3>
+                <h3 className="popular__name">Data Warehousing</h3>
 
                 <span className="popular__price">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+                  Crafting robust data storage solutions.
                 </span>
               </article>
 
               <article className="popular__card">
                 <img src={PopularImg2} alt="" className="popular__img" />
 
-                <h3 className="popular__name">Data mining</h3>
+                <h3 className="popular__name">Data Lakehouse Architecture</h3>
 
                 <span className="popular__price">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+                  Integrating diverse data in a unified system.
                 </span>
               </article>
 
               <article className="popular__card">
                 <img src={PopularImg3} alt="" className="popular__img" />
 
-                <h3 className="popular__name">Data storytelling</h3>
+                <h3 className="popular__name">
+                  Business Intelligence & Visualization
+                </h3>
 
                 <span className="popular__price">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.{" "}
+                  Turning data into visual stories.
+                </span>
+              </article>
+              <article className="popular__card">
+                <img src={PopularImg4} alt="" className="popular__img" />
+
+                <h3 className="popular__name">Data Science Mastery</h3>
+
+                <span className="popular__price">
+                  Unleashing the power of predictive analytics.
                 </span>
               </article>
             </div>
@@ -149,31 +198,41 @@ export default function Home() {
               <Fade bottom cascade>
                 <div className="industry__data">
                   <span className="section__subtitle">Industry Sectors</span>
-                  <h2 className="section__title">Our Industry Sectors</h2>
+                  <h2 className="section__title">
+                    Specialized Solutions for Diverse Industries
+                  </h2>
 
                   <p className="industry__description">
-                    Với kinh nghiệm từ các chuyên gia và nhân sự của mình, chúng
-                    tôi tự tin về khả năng tư vấn và làm việc chuyên sâu tới các
-                    dữ liệu nghiệp vụ của những lĩnh vực kinh doanh có tốc độ
-                    biến đổi nhanh theo thị trường.
+                    At DataMind, we understand that each industry has its unique
+                    challenges and opportunities. Our specialized data and AI
+                    solutions are tailored to meet the specific demands of
+                    various sectors. We're proud to serve a diverse range of
+                    industries, each benefiting from our customized approach to
+                    data-driven solutions.
                   </p>
 
                   <div className="industry__steps grid">
                     <div className="industry__block">
                       <div className="industry__detail">
-                        <h3>Pharma</h3>
+                        <h3>Pharmacy</h3>
                         <p>
-                          Hệ thống giải pháp và phân tích dữ liệu đặc thù cho
-                          ngành dược phẩm và phân phối thuốc
+                          In the fast-evolving pharmaceutical landscape,
+                          DataMind provides data analytics solutions that
+                          enhance research and development, streamline supply
+                          chain management, and improve patient care through
+                          predictive analytics.
                         </p>
                       </div>
                     </div>
                     <div className="industry__block">
                       <div className="industry__detail">
-                        <h3>Retail</h3>
+                        <h3>Retail Chain</h3>
                         <p>
-                          Mô hình dữ liệu sẵn có và hệ thống báo cáo trực quan
-                          hóa cho các doanh nghiệp bán lẻ.
+                          For retail chains, we offer advanced analytics to
+                          optimize inventory management, enhance customer
+                          experience, and drive sales through targeted marketing
+                          strategies. Our solutions help retailers stay ahead in
+                          a highly competitive market.
                         </p>
                       </div>
                     </div>
@@ -181,12 +240,35 @@ export default function Home() {
                       <div className="industry__detail">
                         <h3>Manufacturing</h3>
                         <p>
-                          Giải pháp phân tích dữ liệu về tính hiệu quả cho các
-                          doanh nghiệp sản xuất.
+                          In manufacturing, DataMind's expertise lies in
+                          optimizing production processes, predictive
+                          maintenance, and quality control through AI-driven
+                          insights. We help manufacturers achieve efficiency,
+                          reduce costs, and improve product quality.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="industry__block">
+                      <div className="industry__detail">
+                        <h3>Distribution Industry</h3>
+                        <p>
+                          For the distribution sector, our solutions focus on
+                          optimizing logistics, managing supply chains
+                          efficiently, and forecasting demand accurately. We
+                          empower distributors to make data-backed decisions for
+                          timely and cost-effective operations.
                         </p>
                       </div>
                     </div>
                   </div>
+
+                  <p className="industry__description">
+                    At DataMind, we're committed to adding value to your
+                    business, no matter the industry. Our team of experts works
+                    closely with you to understand your specific needs and
+                    challenges, ensuring our solutions drive growth and success
+                    in your sector.
+                  </p>
                 </div>
               </Fade>
               <img
@@ -201,13 +283,45 @@ export default function Home() {
         {/* CUSTOMERs SECTION  */}
         <section className="customer section" id="project">
           <div className="customer__container">
-            <div className="customer__content grid">
+            <div className="customer__content">
               <div className="customer__data">
                 <span className="span section__subtitle">Project</span>
                 <h2 className="section__title">Our customers</h2>
 
-                <div className="customer__steps grid">
-                  <Fade right cascade>
+                {currentUser && (
+                  <button
+                    className="btn btn__add"
+                    onClick={() => setShowCreateSlider(true)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 22 22"
+                      fill="none"
+                    >
+                      <path
+                        d="M11 7V15M7 11H15M21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 5.47715 5.47715 1 11 1C16.5228 1 21 5.47715 21 11Z"
+                        stroke="white"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    Add Project
+                  </button>
+                )}
+
+                {showCreateSlider && (
+                  <CreateSlider
+                    onClose={() => setShowCreateSlider(false)}
+                    onPostCreated={handleSliderCreated}
+                  />
+                )}
+                <Sliders
+                  refreshSliders={refreshSliders}
+                  onDelete={handleSliderDeleted}
+                />
+                {/* <Fade right cascade>
                     <div className="customer__block customer__block--1">
                       <img
                         src={ImexpharmImg}
@@ -244,8 +358,7 @@ export default function Home() {
                         </span>
                       </div>
                     </div>
-                  </Fade>
-                </div>
+                  </Fade> */}
               </div>
             </div>
           </div>
@@ -301,7 +414,7 @@ export default function Home() {
                     </svg>
                     <div className="contact__detail">
                       <a href="mailto:">anh@datamind.vn</a>
-                      <a href="mailto:">son@datamind.vn</a>
+                      {/* <a href="mailto:">son@datamind.vn</a> */}
                     </div>
                   </div>
                 </div>
@@ -312,9 +425,7 @@ export default function Home() {
       </main>
       <Footer />
       {/* SCROLL UP */}
-      <a href="#" className="scrollup" id="scroll-up">
-        <i className="ri-arrow-up-line"></i>
-      </a>
+      <ScrollToTop />
     </>
   );
 }
