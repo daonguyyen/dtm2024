@@ -1,28 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./topbar.scss";
+import "./topbarcustom.scss";
 import { Link } from "react-router-dom";
 import Logo from "../../../assets/images/home/logo.png";
 import { AuthContext } from "../../context/authContext/authContext";
 import avatarDefault from "../../../assets/images/icon/man.png";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
-const TopBar = () => {
+const TopBarCustom = () => {
   const { currentUser, dispatch } = useContext(AuthContext);
   const [activeSection, setActiveSection] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
+
+  const history = useHistory();
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
   };
 
   const handleMenuClick = (sectionId) => {
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-      targetSection.scrollIntoView({
-        behavior: "smooth",
-      });
-      setActiveSection(sectionId);
-    }
-    setOpenMenu(false);
+    // const targetSection = document.getElementById(sectionId);
+    // if (targetSection) {
+    //   targetSection.scrollIntoView({
+    //     behavior: "smooth",
+    //   });
+    //   setActiveSection(sectionId);
+    // }
+    // setOpenMenu(false);
+    history.push("/");
   };
 
   const handleScroll = () => {
@@ -210,4 +214,4 @@ const TopBar = () => {
   );
 };
 
-export default TopBar;
+export default TopBarCustom;

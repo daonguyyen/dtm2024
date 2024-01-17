@@ -58,6 +58,9 @@ img {
 
 input {
     border: 1px solid lightgray !important;
+    padding: 10px;
+
+    font-size: 16px;
 
     &:focus {
         outline: none;

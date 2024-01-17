@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const cors = require('cors');
 var cookieParser = require('cookie-parser');
 const multer = require("multer");
+const path = require("path");
 
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
@@ -21,6 +22,7 @@ app.use(cors(corsOptions));
 dotenv.config();
 app.use(express.json());
 app.use(cookieParser());
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 mongoose.connect(process.env.MONGO_URL)
     .then(console.log('DB Connected'))
@@ -28,7 +30,7 @@ mongoose.connect(process.env.MONGO_URL)
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "../client/public/upload");
+        cb(null, "uploads");
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + file.originalname)

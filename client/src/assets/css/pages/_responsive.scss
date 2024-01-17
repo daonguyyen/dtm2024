@@ -80,6 +80,11 @@
             }
         }
     }
+
+    .post {
+        width: 100% !important;
+        margin: 0 !important;
+    }
 }
 
 @media screen and (min-width: 576px) {
@@ -108,7 +113,7 @@
 
     .nav__list {
         flex-direction: row !important;
-        column-gap: 3rem;
+        column-gap: 2rem;
     }
 
     .nav__menu {
@@ -142,7 +147,7 @@
     .home {
         &__container {
             position: relative;
-            grid-template-columns: 524px 500px;
+            grid-template-columns: 524px 600px;
             padding-block: 7rem 3rem !important;
         }
 
@@ -162,17 +167,17 @@
             }
         }
 
-        &__description {
-            padding-inline: 0 10rem !important;
-        }
+        // &__description {
+        //     padding-inline: 0 10rem !important;
+        // }
 
-        &__img {
-            width: 600px !important;
-            position: absolute;
-            // top: 5rem;
-            right: -5rem;
-            bottom: 17%;
-        }
+        // &__img {
+        //     width: 600px !important;
+        //     position: absolute;
+        //     top: 5rem;
+        //     right: -5rem;
+        //     bottom: 17%;
+        // }
     }
 
     .about {
@@ -205,7 +210,7 @@
 
     .popular {
         &__container {
-            grid-template-columns: repeat(3, 262px) !important;
+            grid-template-columns: repeat(4, 262px) !important;
             column-gap: 3.5rem;
             padding-block: 4rem 6rem;
         }
@@ -249,7 +254,8 @@
 
     .industry {
         &__content {
-            grid-template-columns: 650px 160px;
+            // grid-template-columns: 650px 160px;
+            grid-template-columns: 1024px;
             align-items: center;
             column-gap: 6rem;
             padding: 2.5rem 0;
@@ -279,7 +285,7 @@
 
     .customer {
         &__content {
-            grid-template-columns: 750px 0px;
+            grid-template-columns: 550px 0px;
             align-items: center;
             padding-bottom: 2rem;
         }

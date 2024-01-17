@@ -15,31 +15,38 @@ import { useContext } from "react";
 import { AuthContext } from "./app/context/authContext/authContext";
 import Blog from "./app/pages/home/Blog";
 import Profile from "./app/pages/profile/Profile";
+import TopBarCustom from "./app/components/topBarCustom/TopBarCustom";
 function App() {
   const { currentUser } = useContext(AuthContext);
   return (
     <Router>
-      <TopBar />
+
       <Switch>
         <Route exact path="/">
+          <TopBar />
           <HomePage />
         </Route>
-        <Route path="/register">
+        <Route path="/create-user">
           {currentUser ? <HomePage /> : <Register />}
         </Route>
         <Route path="/login">
+          <TopBarCustom />
           {currentUser ? <HomePage /> : <Login />}
         </Route>
         <Route path="/write">
+          <TopBarCustom />
           {currentUser ? <Write /> : <Login />}
         </Route>
         <Route path="/profile">
+          <TopBarCustom />
           {currentUser ? <Profile /> : <Login />}
         </Route>
         <Route path="/posts">
+          <TopBarCustom />
           <Blog />
         </Route>
         <Route path="/post/:postId">
+          <TopBarCustom />
           <Single />
         </Route>
       </Switch>
